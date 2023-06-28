@@ -11,13 +11,15 @@ class PlatesController {
 
     const filename = await diskStorage.saveFile(imageFilename);
 
-    const plates_id = await knex("plates").insert({
+    const data = await knex("plates").insert({
       image: filename,
       title,
       description,
       category,
       price
     });
+
+    const [plates_id] = data;
 
     const hasOnlyOneIngredient = typeof (ingredients) === "string";
 
